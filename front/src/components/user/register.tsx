@@ -9,6 +9,7 @@ export default function Register(): ReactElement {
     const [nickName, setNickName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<string>(""); 
     const navigate = useNavigate()
 
     const onSubmitForm = (e: any)=>{
@@ -23,15 +24,20 @@ export default function Register(): ReactElement {
         console.log("Hello data : ", data)
         saveUser(data)
             .then((res)=>{
-                console.log("result : ",res);
                 if(res.status === 200) {
                     return navigate('/login')
                 }
-            })
+                
+            }).catch((err: any) => {
+                setError(err); 
+            });
+            
     }
+
 
     return (
         <div>
+            {error && <p>{error}</p>} 
             <form
                 onSubmit={onSubmitForm}
                 className="block custom-form"
@@ -51,6 +57,7 @@ export default function Register(): ReactElement {
                 </div>
                 <div>
                     <input 
+                        required
                         type="text" 
                         placeholder="Nom" 
                         value={lastName}
@@ -61,6 +68,7 @@ export default function Register(): ReactElement {
                 </div>
                 <div>
                     <input 
+                        required
                         type="text" 
                         placeholder="Pseudo" 
                         value={nickName}
@@ -71,7 +79,8 @@ export default function Register(): ReactElement {
                 </div>
                 <div>
                     <input 
-                        type="text" 
+                        required
+                        type="email" 
                         placeholder="Email" 
                         value={email}
                         onChange={(e)=>{
@@ -81,6 +90,7 @@ export default function Register(): ReactElement {
                 </div>
                 <div>
                     <input 
+                        required
                         type="password" 
                         placeholder="Mot de passe" 
                         value={password}
@@ -94,7 +104,9 @@ export default function Register(): ReactElement {
                 >
                     Envoyer
                 </button>
+                
             </form>
+            
         </div>
     )
 }

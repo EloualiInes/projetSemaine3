@@ -1,37 +1,43 @@
 import React, {useState, ReactElement} from 'react'
-// import { loginUser } from '../../api/user';
-// import { useAppDispatch, useAppSelector } from '../../lib/redux/hook';
-// import { loginUserReducer } from '../../lib/redux/user/userReducer';
+import { loginUser } from '../../api/user';
+import {useDispatch, useSelector} from 'react-redux';
+import { loginUserReducer } from '../../lib/redux/userReducer';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register(): ReactElement {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    // const dispatch = useAppDispatch();
-    const navigate = useNavigate()
+    const [error, setError] = useState<string>(""); 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onSubmitForm = (e: any)=>{
         e.preventDefault();
-        // const data: {email: string, password: string} = {      
-        //     email: email,
-        //     password: password
-        // }
+        const data: {email: string, password: string} = {      
+            email: email,
+            password: password
+        }
 
-        // loginUser(data)
-        //     .then((res)=>{
-        //         console.log(res);
-        //         if(res.data.token) {
-        //             window.localStorage.setItem("token-forum", res.data.token);
-        //             dispatch(loginUserReducer(res.data.user))
-        //             return navigate('/')
-        //         }
-        //     })
+        loginUser(data)
+            .then((res)=>{
+                if(res.status === 200) {
+                    // login ok => localstorage token + redux infos user + navigate home
+                    console.log(res);
+                    localStorage.setItem("token", res.data.token);
+                    dispatch(loginUserReducer(res.data.user));
+                    navigate("/home");
+                }
+            }).catch((err: any) => {
+                console.log(err)
+                setError(err); 
+            });
 
 
     }
 
     return (
         <div>
+            {error && <p>{error}</p>} 
             <form
                 onSubmit={onSubmitForm}
                 className="block custom-form"

@@ -1,32 +1,24 @@
 const User = require('../models/user.models');
-const {checkInputsSignUp, checkFormatEmail, checkFormatPassword} = require('../utils/user.utils')
+const { 
+    allCheck,
+} = require('../utils/user.utils')
 const {trimObjectValues} = require('../utils/utils')
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 var jwt = require('jsonwebtoken');
-const secret = 'piti&chat!';
+
 
 // Register
 signup = async (req, res) => {
     
     // use trim
     const dataTrim = trimObjectValues(req.body);
-    const checkInput = checkInputsSignUp(dataTrim);
-    console.log("checkInput : ", checkInput)
-    // Checks inputs not null and not empty
-    if(!checkInput.check){
-        res.status(400).json({ error: checkInput.err });
-        return;
-    }
-    // Checks format email
-    if(checkFormatEmail(dataTrim.email)){
-        res.status(400).json({ error: "Veuillez écire un email valide" });
-        return;
-    }
+    // const checkInput = checkInputsSignUp(dataTrim);
 
-    // Checks format password
-    if(checkFormatPassword(dataTrim.password)){
-        res.status(400).json({ error: "Veuillez écire un pseudo valide avec au moins 5 caractères, une minuscule, une majuscule et un chiffre " });
+    // Checks inputs not null and not empty
+    const checks = allCheck(false, dataTrim)
+    if(!checks.checks){
+        res.status(400).json({ error: checks.error });
         return;
     }
    
@@ -49,7 +41,43 @@ signup = async (req, res) => {
 }
 
 // Login
+login = async (req, res) => {
+    const dataTrim = trimObjectValues(req.body);
+
+    // Checks inputs are not null or empty
+    const checks = allCheck(true, dataTrim)
+    if(!checks.checks){
+        res.status(400).json({ error: checks.error });
+        return;
+    }
+    
+    // Check that the email exists
+    const user = await User.find({ email: dataTrim.email });
+    console.log("user  : ", user)
+    if(user.length === 0){
+        res.status(404).json({ error: "L'e-mail saisi n'a pas été trouvé dans notre système. Veuillez vérifier votre e-mail ou créer un nouveau compte."});
+        return;
+    }
+    // Check password
+    const compared = await bcrypt.compare(dataTrim.password, user[0].password);
+    console.log("password : ", dataTrim.password);
+console.log("hash : ", user[0].password);
+console.log("compared : ", compared)
+    if(!compared) {
+        console.log("here")
+        res.status(404).json({ error: "Mot de passe incorrect. Veuillez réessayer."});
+        return;
+    } 
+
+    // Create Token
+    const payload = {email: dataTrim.email, id: user[0]._id};
+    const token = jwt.sign(payload, process.env.SECRET);
+    const infoUser = {...user[0]}
+    delete infoUser.password;
+    res.json({status:200, data: {token, user: infoUser}});
+
+}
 
 
 
-module.exports = {signup}
+module.exports = {signup, login}
