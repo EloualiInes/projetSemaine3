@@ -23,3 +23,10 @@ export const loginUser = async (data : { email: string, password: string}) => {
         throw error.response.data.error;
     }
 }
+
+export const checkToken = async (token: string)=>{
+	return axios.get(`${process.env.REACT_APP_API_URL}/api/auth/checkToken`, {headers: {'x-access-token': token}})
+		.then((response)=>{
+			return response.data;
+		})
+}

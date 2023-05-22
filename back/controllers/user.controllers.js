@@ -5,7 +5,7 @@ const {
 const {trimObjectValues} = require('../utils/utils')
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 
 // Register
@@ -13,7 +13,6 @@ signup = async (req, res) => {
     
     // use trim
     const dataTrim = trimObjectValues(req.body);
-    // const checkInput = checkInputsSignUp(dataTrim);
 
     // Checks inputs not null and not empty
     const checks = allCheck(false, dataTrim)
@@ -60,9 +59,6 @@ login = async (req, res) => {
     }
     // Check password
     const compared = await bcrypt.compare(dataTrim.password, user[0].password);
-    console.log("password : ", dataTrim.password);
-console.log("hash : ", user[0].password);
-console.log("compared : ", compared)
     if(!compared) {
         console.log("here")
         res.status(404).json({ error: "Mot de passe incorrect. Veuillez réessayer."});

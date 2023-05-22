@@ -6,6 +6,7 @@ import Login from './components/user/login';
 import Home from './components/home';
 import { Provider } from 'react-redux';
 import { store } from './lib/redux/store';
+import RequireAuth from './lib/helpers/RequireAuth';
 
 function App() {
   return (
@@ -15,17 +16,24 @@ function App() {
           <Routes>
             <Route path="/" 
               element={
+                <RequireAuth withAuth={false}>
                   <Register/> 
+                </RequireAuth>
               } 
             />
             <Route path="/login" 
               element={
+                <RequireAuth withAuth={false}>
                   <Login/>
+                </RequireAuth>
               } 
             />
             <Route path="/home" 
               element={
+                <RequireAuth withAuth={true}>
                   <Home/>
+                </RequireAuth>
+                  
               } 
             />
           </Routes>

@@ -10,9 +10,11 @@ const dbUrl = process.env.DB_URL;
 
 
 // Routes
-const routeUser = require("./routes/user.route")
+const routeUser = require("./routes/user.route");
+const routeAuth = require("./routes/auth.route");
 
 app.use("/api/user", routeUser);
+app.use("/api/auth", routeAuth);
 
 const connect = async() => {
     try{
