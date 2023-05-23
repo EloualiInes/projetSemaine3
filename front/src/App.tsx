@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { store } from './lib/redux/store';
 import RequireAuth from './lib/helpers/RequireAuth';
 import Navbar from './components/navbar';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 function App() {
   return (

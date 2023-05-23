@@ -52,8 +52,16 @@ L'utilisateur peut consulter differents stats
 	+ CSS Login [70%]
 	+ CSS register [70%]
 	+ CSS Home [80%]
-	+ L'utilisateur peut visualiser les données age/sexe/classe graphiquement[check]
-	+ L'utilisateur peut reset pour faire une nouvelle recherche
+	
+	+ L'utilisateur peut faire une recherche globale
+		+ L'utilisateur peut visualiser les données age/sexe/classe graphiquement[check]
+		+ L'utilisateur peut chercher les données des personnes en fonction de leur age [check]
+		+ L'utilisateur peut chercher les données des personnes en fonction de leur sexe [check]
+		+ L'utilisateur peut chercher les données des personnes en fonction de la classes[check]
+		+ L'utilisateur peut chercher les données des personnes en fonction de plusieurs paramètres [check]
+
+24/05
+	+ L'utilisateur peut reset pour faire une nouvelle recherche ou faire une fleche vers le haut pour remonter vers le formulaire
 	+ L'utilisateur peut demander la moyenne, l'écart type des données trouvé
 
 ======================================================================== 

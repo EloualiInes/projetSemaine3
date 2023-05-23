@@ -5,12 +5,13 @@ import { getAge, getClass, getSexe } from '../api/passengers';
 import ChartComposant from './ChartComposant';
 import { TypeData } from '../types/typesChart';
 import { colorBorder, colorPalette } from '../lib/helpers/Color';
+import WindowSearch from './windowSearch';
 
 
 export default function Home() {
   const user = useSelector(selectUser);
   const [mode, setMode] = useState(0);
-  const [visibleGraphe, setVisibleGraphe] = useState<boolean>(false);
+  const [visibleGrapheGlobal, setVisibleGrapheGlobal] = useState<boolean>(false);
   const [displayGraphe, setDisplayGraphe] = useState<TypeData>({
     labels: [""],
     datasets: [{
@@ -21,7 +22,10 @@ export default function Home() {
       borderWidth: 1
     }]
   });
-  const [activeOnglet, setActiveOnglet] = useState(0);
+  const [activeOngletPp, setActiveOngletPp] = useState(0);
+  const [activeSousOnglet, setActiveSousOnglet] = useState(0);
+
+
 
   const extractNumericValue = (ageRange: string) => {
     const [start] = ageRange.split('-');
@@ -30,7 +34,7 @@ export default function Home() {
 
 
   const handleStatsAge = async () => {
-    setVisibleGraphe(true);
+    setVisibleGrapheGlobal(true);
     const agePassengers: [{ _id: string, count: number }] = await getAge();
     agePassengers.sort((a, b) => {
       const valueA = extractNumericValue(a._id);
@@ -43,7 +47,7 @@ export default function Home() {
   }
 
   const handleStatsSexe = async () => {
-    setVisibleGraphe(true);
+    setVisibleGrapheGlobal(true);
     const sexePassengers: [{ _id: string, count: number }] = await getSexe();
     const labels = sexePassengers.map(({ _id }) => _id);
     const counts = sexePassengers.map(({ count }) => count);
@@ -51,7 +55,7 @@ export default function Home() {
   }
 
   const handleStatsClass = async () => {
-    setVisibleGraphe(true);
+    setVisibleGrapheGlobal(true);
     const classPassengers: [{ _id: number, count: number }] = await getClass();
     classPassengers.sort((a, b) => {
       const valueA = a._id
@@ -86,29 +90,52 @@ export default function Home() {
         <p>Rejoignez-nous et explorez les histoires cachées derrière les chiffres du Titanic.</p>
       </div>
 
-
-      {/* Filtres généraux */}
-      <div className='filter-container'>
-        <button className='filter-button' onClick={handleStatsAge}>Age</button>
-        <button className='filter-button' onClick={handleStatsSexe}>Sexe</button>
-        <button className='filter-button' onClick={handleStatsClass}>Classe</button>
-      </div>
-
-
-      {visibleGraphe && <>
-        <div className="tabs-container" style={{ width: "100%", height: "400px", marginBottom: "100px" }} >
-
-          <div className="tabs">
-            <button className={`tab ${activeOnglet === 0 ? 'active' : ''}`} onClick={() => { setMode(0); setActiveOnglet(0) }}>Barres</button>
-            <button className={`tab ${activeOnglet === 1 ? 'active' : ''}`} onClick={() => { setMode(1); setActiveOnglet(1) }}>Camembert</button>
-          </div>
-          <div className="content">
-            <ChartComposant data={displayGraphe} mode={mode} />
-          </div>
-
+      <div className="windowsearch">
+        {/* Filtres généraux */}
+        <div className="onglets">
+          <button
+            className={`tab ${activeOngletPp === 0 ? 'active' : ''}`}
+            onClick={() => setActiveOngletPp(0)}
+          >
+            Recherche
+          </button>
+          <button
+            className={`tab ${activeOngletPp === 1 ? 'active' : ''}`}
+            onClick={() => setActiveOngletPp(1)}
+          >
+            Statistiques générales
+          </button>
         </div>
-      </>}
+
+        {
+          activeOngletPp === 0 ? <WindowSearch /> :
+            <>
+              <div className="contentWindow">
+                <div className='filter-container'>
+                  <button className='filter-button' onClick={handleStatsAge}>Age</button>
+                  <button className='filter-button' onClick={handleStatsSexe}>Sexe</button>
+                  <button className='filter-button' onClick={handleStatsClass}>Classe</button>
+                </div>
+
+
+                {visibleGrapheGlobal && <>
+                  <div className="tabs-container" style={{ width: "100%", height: "400px", marginBottom: "100px" }} >
+
+                    <div className="tabs">
+                      <button className={`tab ${activeSousOnglet === 0 ? 'active' : ''}`} onClick={() => { setMode(0); setActiveSousOnglet(0) }}>Barres</button>
+                      <button className={`tab ${activeSousOnglet === 1 ? 'active' : ''}`} onClick={() => { setMode(1); setActiveSousOnglet(1) }}>Camembert</button>
+                    </div>
+                    <div className="content">
+                      <ChartComposant data={displayGraphe} mode={mode} />
+                    </div>
+
+                  </div>
+                </>}
+              </div>
+          </>
+        }
 
     </div>
+    </div >
   )
 }
