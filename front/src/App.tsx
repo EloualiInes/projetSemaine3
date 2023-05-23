@@ -7,12 +7,14 @@ import Home from './components/home';
 import { Provider } from 'react-redux';
 import { store } from './lib/redux/store';
 import RequireAuth from './lib/helpers/RequireAuth';
+import Navbar from './components/navbar';
 
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
         <Router>
+          <Navbar/>
           <Routes>
             <Route path="/" 
               element={

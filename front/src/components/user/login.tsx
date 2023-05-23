@@ -24,7 +24,7 @@ export default function Register(): ReactElement {
                     // login ok => localstorage token + redux infos user + navigate home
                     console.log(res);
                     localStorage.setItem("token", res.data.token);
-                    dispatch(loginUserReducer(res.data.user));
+                    dispatch(loginUserReducer(res.data.user._doc));
                     navigate("/home");
                 }
             }).catch((err: any) => {

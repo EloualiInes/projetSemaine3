@@ -51,7 +51,9 @@ login = async (req, res) => {
     }
     
     // Check that the email exists
-    const user = await User.find({ email: dataTrim.email });
+    const user = await User.find({
+        email: { $regex: new RegExp('^' + dataTrim.email, 'i') }
+    });
     console.log("user  : ", user)
     if(user.length === 0){
         res.status(404).json({ error: "L'e-mail saisi n'a pas été trouvé dans notre système. Veuillez vérifier votre e-mail ou créer un nouveau compte."});

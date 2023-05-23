@@ -15,7 +15,7 @@ export default function RequireAuth({children, withAuth}:{children:ReactNode, wi
         })
 
         const verifyLogin = async ()=>{
-            const token = window.localStorage.getItem("token");
+            const token = localStorage.getItem("token");
             if(!user.isLogged && withAuth) {
                 if(token === null ) {
                     return navigate("/")
