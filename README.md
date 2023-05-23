@@ -37,12 +37,25 @@ L'utilisateur peut se connecter [check]
 		=> lier front et back [check]
 		=> enregistrer localstorage token [check]
 
-Les routes sont sécurisées
+Les routes sont sécurisées [check]
 
 ========================================================================
 23/05
 Part 2
 L'utilisateur peut consulter differents stats
+
+	+ importer fichier csv dans la bdd. [check]
+	+ Ajouter menu => permet de se connecter et de se déconnecter
+	+ L'utilisateur peut faire une recherche en fonction du sexe des passagers
+	+ L'utilisateur peut faire une recherche en fonction de l'age des passagers
+	+ L'utilisateur peut faire une recherche en fonction de la classe des passagers
+	+ L'utilisateur peut visualiser les données graphiquement
+	+ L'utilisateur peut reset pour faire une nouvelle recherche
+	+ L'utilisateur peut demander la moyenne, l'écart type des données trouvé
+
+======================================================================== 
+Part 3
+	=== Réfléchir à une autre analyse de données pertinentes.
 
 	
 
