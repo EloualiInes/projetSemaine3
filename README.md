@@ -49,6 +49,9 @@ L'utilisateur peut consulter differents stats
 	+ L'utilisateur peut faire une recherche en fonction du sexe des passagers [check]
 	+ L'utilisateur peut faire une recherche en fonction de l'age des passagers [check]
 	+ L'utilisateur peut faire une recherche en fonction de la classe des passagers [check]
+	+ CSS Login
+	+ CSS register
+	+ CSS Home
 	+ L'utilisateur peut visualiser les données graphiquement
 	+ L'utilisateur peut reset pour faire une nouvelle recherche
 	+ L'utilisateur peut demander la moyenne, l'écart type des données trouvé
