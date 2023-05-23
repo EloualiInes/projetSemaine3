@@ -45,10 +45,10 @@ Part 2
 L'utilisateur peut consulter differents stats
 
 	+ importer fichier csv dans la bdd. [check]
-	+ Ajouter menu => permet de se connecter et de se déconnecter
-	+ L'utilisateur peut faire une recherche en fonction du sexe des passagers
-	+ L'utilisateur peut faire une recherche en fonction de l'age des passagers
-	+ L'utilisateur peut faire une recherche en fonction de la classe des passagers
+	+ Ajouter menu => permet de se connecter et de se déconnecter [check]
+	+ L'utilisateur peut faire une recherche en fonction du sexe des passagers [check]
+	+ L'utilisateur peut faire une recherche en fonction de l'age des passagers [check]
+	+ L'utilisateur peut faire une recherche en fonction de la classe des passagers [check]
 	+ L'utilisateur peut visualiser les données graphiquement
 	+ L'utilisateur peut reset pour faire une nouvelle recherche
 	+ L'utilisateur peut demander la moyenne, l'écart type des données trouvé
@@ -57,5 +57,4 @@ L'utilisateur peut consulter differents stats
 Part 3
 	=== Réfléchir à une autre analyse de données pertinentes.
 
-	
 
