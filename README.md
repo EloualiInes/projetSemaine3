@@ -44,15 +44,15 @@ Les routes sont sécurisées [check]
 Part 2
 L'utilisateur peut consulter differents stats
 
-	+ importer fichier csv dans la bdd. [check]
+	importer fichier csv dans la bdd. [check]
 	+ Ajouter menu => permet de se connecter et de se déconnecter [check]
 	+ L'utilisateur peut faire une recherche en fonction du sexe des passagers [check]
 	+ L'utilisateur peut faire une recherche en fonction de l'age des passagers [check]
 	+ L'utilisateur peut faire une recherche en fonction de la classe des passagers [check]
-	+ CSS Login
-	+ CSS register
-	+ CSS Home
-	+ L'utilisateur peut visualiser les données graphiquement
+	+ CSS Login [70%]
+	+ CSS register [70%]
+	+ CSS Home [80%]
+	+ L'utilisateur peut visualiser les données age/sexe/classe graphiquement[check]
 	+ L'utilisateur peut reset pour faire une nouvelle recherche
 	+ L'utilisateur peut demander la moyenne, l'écart type des données trouvé
 

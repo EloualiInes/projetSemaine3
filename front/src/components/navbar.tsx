@@ -14,8 +14,16 @@ function Navbar() {
     navigate("/login")
   }
 
+  const navLogin = () => {
+    navigate("/login")
+  }
+
+  const navRegister = () => {
+    navigate("/")
+  }
+
   return (
-    <nav>
+    <nav className='navbar'>
       {isAuthenticated ? (
         <ul>
           <li>Accueil</li>
@@ -23,8 +31,8 @@ function Navbar() {
         </ul>
       ) : (
         <ul>
-          <li>Connexion</li>
-          <li>Inscription</li>
+          <li onClick={navLogin}>Connexion</li>
+          <li onClick={navRegister}>Inscription</li>
         </ul>
       )}
     </nav>

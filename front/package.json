@@ -12,8 +12,12 @@
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "fusioncharts": "^3.20.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-fusioncharts": "^4.0.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
@@ -46,6 +50,9 @@
     ]
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0"
+    "@types/axios": "^0.14.0",
+    "html-webpack-plugin": "^5.5.1",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1"
   }
 }

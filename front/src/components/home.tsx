@@ -2,54 +2,113 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../lib/redux/userReducer';
 import { getAge, getClass, getSexe } from '../api/passengers';
+import ChartComposant from './ChartComposant';
+import { TypeData } from '../types/typesChart';
+import { colorBorder, colorPalette } from '../lib/helpers/Color';
+
 
 export default function Home() {
   const user = useSelector(selectUser);
-  const [result, setResult] = useState<string>("")
+  const [mode, setMode] = useState(0);
+  const [visibleGraphe, setVisibleGraphe] = useState<boolean>(false);
+  const [displayGraphe, setDisplayGraphe] = useState<TypeData>({
+    labels: [""],
+    datasets: [{
+      label: "",
+      data: [-1],
+      backgroundColor: colorPalette,
+      borderColor: colorBorder,
+      borderWidth: 1
+    }]
+  });
+  const [activeOnglet, setActiveOnglet] = useState(0);
+
+  const extractNumericValue = (ageRange: string) => {
+    const [start] = ageRange.split('-');
+    return parseInt(start, 10);
+  };
+
 
   const handleStatsAge = async () => {
-    const agePassengers = await getAge();
-    setResult(JSON.stringify(agePassengers));
+    setVisibleGraphe(true);
+    const agePassengers: [{ _id: string, count: number }] = await getAge();
+    agePassengers.sort((a, b) => {
+      const valueA = extractNumericValue(a._id);
+      const valueB = extractNumericValue(b._id);
+      return valueA - valueB;
+    });
+    const labels = agePassengers.map(({ _id }) => _id);
+    const counts = agePassengers.map(({ count }) => count);
+    displayStats(labels, counts, "Age des passagers");
   }
 
   const handleStatsSexe = async () => {
-    const sexePassengers = await getSexe();
-    setResult(JSON.stringify(sexePassengers));
+    setVisibleGraphe(true);
+    const sexePassengers: [{ _id: string, count: number }] = await getSexe();
+    const labels = sexePassengers.map(({ _id }) => _id);
+    const counts = sexePassengers.map(({ count }) => count);
+    displayStats(labels, counts, "Sexe des passagers");
   }
 
   const handleStatsClass = async () => {
-    const classPassengers = await getClass();
-    setResult(JSON.stringify(classPassengers));
+    setVisibleGraphe(true);
+    const classPassengers: [{ _id: number, count: number }] = await getClass();
+    classPassengers.sort((a, b) => {
+      const valueA = a._id
+      const valueB = b._id
+      return valueA - valueB;
+    });
+    const labels = classPassengers.map(({ _id }) => `Classe ${_id}`);
+    const counts = classPassengers.map(({ count }) => count);
+    displayStats(labels, counts, "Classes des passagers");
   }
+
+  const displayStats = (labels: string[], counts: number[], titleGraphe: string) => {
+    setDisplayGraphe(prevState => ({
+      ...prevState,
+      labels: labels,
+      datasets: [{
+        ...prevState.datasets[0],
+        label: titleGraphe,
+        data: counts
+      }]
+    }));
+    document.documentElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+
+
   return (
     <div>
       <h1>Bienvenue {user.infos?.nickName}</h1>
-      <h2>Bienvenue sur notre site de statistiques dédié au Titanic !</h2>
-
-      <p>Plongez dans l'histoire fascinante du légendaire paquebot et explorez des données uniques sur les passagers qui ont embarqué à bord. Notre site vous offre un aperçu captivant des caractéristiques démographiques de ces voyageurs exceptionnels.</p>
-
-      <p>Grâce à notre interface conviviale, vous pourrez accéder à une multitude d'informations pertinentes. Vous pourrez explorer les données en fonction de l'âge des passagers, vous permettant de découvrir les différentes tranches d'âge représentées à bord du Titanic. Que vous soyez curieux de connaître la moyenne d'âge des passagers ou que vous souhaitiez découvrir les plus jeunes ou les plus âgés à bord, nos statistiques vous révéleront tous les détails fascinants.</p>
-
-      <p>Vous pourrez également plonger dans les différences de genre parmi les passagers. Notre site vous fournira des informations détaillées sur la répartition entre hommes et femmes à bord du Titanic. Vous pourrez ainsi explorer les proportions respectives des deux sexes et en apprendre davantage sur les disparités éventuelles.</p>
-
-      <p>En outre, notre site vous permettra d'explorer les données relatives aux classes des passagers. Vous pourrez découvrir les différents niveaux de confort offerts à bord et observer comment les passagers étaient répartis entre ces classes. Que vous soyez intéressé par la première classe luxueuse, la deuxième classe raffinée ou la troisième classe plus modeste, nos statistiques vous dévoileront des détails passionnants sur les choix de voyage des passagers.</p>
-
-      <p>Nous mettons à votre disposition des graphiques interactifs, des tableaux et des visualisations captivantes pour vous aider à explorer ces données historiques de manière immersive. Vous aurez la possibilité de filtrer et de trier les informations selon vos préférences, vous permettant ainsi de plonger dans les détails qui vous intéressent le plus.</p>
-
-      <p>Que vous soyez un passionné d'histoire, un chercheur ou simplement curieux d'en savoir plus sur les passagers du Titanic, notre site de statistiques est l'endroit idéal pour satisfaire votre soif de connaissances. Nous vous invitons à vous embarquer dans cette aventure captivante et à découvrir les secrets que renferment les données du Titanic.</p>
-
-      <p>N'hésitez pas à commencer votre exploration dès maintenant et à vous laisser captiver par les histoires et les statistiques uniques de l'épopée du Titanic !</p>
-      
-      {/* Filtres généraux */}
-      <ul>
-        <li onClick={handleStatsAge}>Age</li>
-        <li onClick={handleStatsSexe}>Sexe</li>
-        <li onClick={handleStatsClass}>Classe</li>
-      </ul>
-
-      <div>
-      {result && <p>{result}</p>} 
+      <div className="presentation-text">
+        <h2>Bienvenue sur notre site de statistiques dédié au Titanic !</h2>
+        <p>Découvrez les statistiques fascinantes du Titanic ! Explorez les données sur l'âge, le sexe et la classe des passagers. Plongez dans les graphiques interactifs et les visualisations captivantes pour en savoir plus sur cette tragédie maritime légendaire.</p>
+        <p>Rejoignez-nous et explorez les histoires cachées derrière les chiffres du Titanic.</p>
       </div>
+
+
+      {/* Filtres généraux */}
+      <div className='filter-container'>
+        <button className='filter-button' onClick={handleStatsAge}>Age</button>
+        <button className='filter-button' onClick={handleStatsSexe}>Sexe</button>
+        <button className='filter-button' onClick={handleStatsClass}>Classe</button>
+      </div>
+
+
+      {visibleGraphe && <>
+        <div className="tabs-container" style={{ width: "100%", height: "400px", marginBottom: "100px" }} >
+
+          <div className="tabs">
+            <button className={`tab ${activeOnglet === 0 ? 'active' : ''}`} onClick={() => { setMode(0); setActiveOnglet(0) }}>Barres</button>
+            <button className={`tab ${activeOnglet === 1 ? 'active' : ''}`} onClick={() => { setMode(1); setActiveOnglet(1) }}>Camembert</button>
+          </div>
+          <div className="content">
+            <ChartComposant data={displayGraphe} mode={mode} />
+          </div>
+
+        </div>
+      </>}
+
     </div>
   )
 }

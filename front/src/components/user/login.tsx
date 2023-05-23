@@ -1,6 +1,6 @@
 import React, {useState, ReactElement} from 'react'
 import { loginUser } from '../../api/user';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { loginUserReducer } from '../../lib/redux/userReducer';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,17 +36,18 @@ export default function Register(): ReactElement {
     }
 
     return (
-        <div>
+        <div className='user-container'>
             {error && <p>{error}</p>} 
             <form
                 onSubmit={onSubmitForm}
-                className="block custom-form"
+                className="form-container"
             >   
-                <div>
+                <div className="form-title">
                     <label>Se connecter</label>
                 </div>
-                <div>
+                <div className="form-group">
                     <input 
+                        className="form-input"
                         type="email" 
                         placeholder="Email" 
                         value={email}
@@ -55,8 +56,9 @@ export default function Register(): ReactElement {
                         }}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <input 
+                        className="form-input"
                         type="password" 
                         placeholder="Mot de passe" 
                         value={password}
@@ -66,6 +68,7 @@ export default function Register(): ReactElement {
                     />
                 </div>
                 <button
+                    className="form-submit"
                     type="submit"
                 >
                     Envoyer

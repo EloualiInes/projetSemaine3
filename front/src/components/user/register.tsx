@@ -36,17 +36,18 @@ export default function Register(): ReactElement {
 
 
     return (
-        <div>
+        <div className='user-container'>
             {error && <p>{error}</p>} 
             <form
                 onSubmit={onSubmitForm}
-                className="block custom-form"
+                className="form-container"
             >
-                <div>
+                <div className="form-title">
                     <label>S'enregistrer</label>
                 </div>
-                <div>
+                <div className="form-group">
                     <input 
+                        className="form-input"
                         type="text" 
                         placeholder="Prénom" 
                         value={firstName}
@@ -55,8 +56,9 @@ export default function Register(): ReactElement {
                         }}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <input 
+                        className="form-input"
                         required
                         type="text" 
                         placeholder="Nom" 
@@ -66,8 +68,9 @@ export default function Register(): ReactElement {
                         }}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <input 
+                        className="form-input"
                         required
                         type="text" 
                         placeholder="Pseudo" 
@@ -77,8 +80,9 @@ export default function Register(): ReactElement {
                         }}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <input 
+                        className="form-input"
                         required
                         type="email" 
                         placeholder="Email" 
@@ -88,8 +92,9 @@ export default function Register(): ReactElement {
                         }}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <input 
+                        className="form-input"
                         required
                         type="password" 
                         placeholder="Mot de passe" 
@@ -100,6 +105,7 @@ export default function Register(): ReactElement {
                     />
                 </div>
                 <button
+                    className="form-submit"
                     type="submit"
                 >
                     Envoyer
