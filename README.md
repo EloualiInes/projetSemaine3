@@ -61,11 +61,13 @@ L'utilisateur peut consulter differents stats
 		+ L'utilisateur peut chercher les données des personnes en fonction de plusieurs paramètres [check]
 
 24/05
-	+ L'utilisateur peut reset pour faire une nouvelle recherche ou faire une fleche vers le haut pour remonter vers le formulaire
-	+ L'utilisateur peut demander la moyenne, l'écart type des données trouvé
+	+ L'utilisateur peut demander la moyenne, l'écart type des données trouvé [check]
+	+ Travail sur le css et interactions
 
-======================================================================== 
+
 Part 3
 	=== Réfléchir à une autre analyse de données pertinentes.
-
+	+ Ajout de la statistique des personnes qui ont survécu ou non dans les statistiques globaux  [check]
+	+ L'utilisateur peut reset pour faire une nouvelle recherche ou faire une fleche vers le haut pour remonter vers le formulaire
+	+ Retravailler le css
 

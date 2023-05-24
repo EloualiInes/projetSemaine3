@@ -4,7 +4,6 @@
 }
 
 .navbar {
-  background-color: #f2f2f2;
   height: 60px;
   display: flex;
   justify-content: flex-end;
@@ -12,7 +11,9 @@
   padding: 0 20px;
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #fff;
+  background: linear-gradient(to right, #040f21, #1a4f79);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .navbar > ul {
@@ -24,16 +25,41 @@
 
 .navbar > ul li {
   margin-right: 20px;
-  color: #555;
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s ease;
   cursor: pointer;
+  color: #bcd6dd;
 }
 
-.navbar-menu li:last-child {
+.navbar > ul li:last-child {
   margin-right: 0;
 }
+
+.navbar > ul li:hover {
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+.navbar > ul li.active {
+  color: #fff;
+  border-bottom: 2px solid #59a0cc;
+}
+
+.navbar-logo {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: auto;
+  color: #bcd6dd;
+  text-decoration: none;
+}
+
+.navbar-logo:hover {
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+
 
 /* Login / Register */
 
@@ -41,16 +67,18 @@
   height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  background-image: url('./assets/images/titanic_background.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .form-container {
   max-width: 350px;
   margin: 60px auto;
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
-  flex: 1;
 }
 
 .form-title {
@@ -66,16 +94,17 @@
 }
 
 .form-input {
-  width: 95%;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #888;
+  border-bottom-color: #888;
 }
 
 .form-submit {
@@ -84,7 +113,7 @@
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  background-color: #555;
+  background-color: #3175a6;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -92,15 +121,26 @@
 }
 
 .form-submit:hover {
-  background-color: #333;
+  background-color: #222;
 }
 
-
 /* Home */
+.presentation-container {
+  height: calc(100vh - 60px) ;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: linear-gradient(to right, #040f21, #1a4f79);
+  color: #fff;
+}
+
+.presentation-container h1{
+  margin-top: 60px;
+}
 
 .presentation-text {
   font-size: 16px;
-  color: #333;
   text-align: center;
   line-height: 1.5;
   margin: 0 15%;
@@ -114,6 +154,28 @@
 
 .presentation-text p {
   margin-bottom: 10px;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.scroll-down svg {
+  display: block;
+  margin: 0 auto;
+  animation: bounce 2s infinite;
+}
+
+.scroll-down svg path {
+  fill: #fff;
+}
+
+.scroll-down svg:hover path {
+  fill: #bcd6dd;
 }
 
 .filter-container {
@@ -146,6 +208,17 @@
 
 
 /* Stats */
+.contentPrincipal{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.windowsearch{
+  flex :1;
+  margin-top: 60px;
+}
 .tabs-container {
   display: flex;
   height: 400px;
@@ -182,6 +255,56 @@
   color: #333;
 }
 
+.tab.graph {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.tab.graph:hover {
+  background-color: #e0e0e0;
+}
+
+.tab.active.graph {
+  background-color: #fff;
+  border-bottom: 2px solid #333;
+}
+
+.separator {
+  width: 80%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 15px 10px;
+}
+
+.average-display {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  align-self: center;
+}
+
+.average-display.show {
+  opacity: 1;
+  transform: translateY(0);
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.average-display.show h3 {
+  margin-top: 0;
+}
+
+.average-display.show .average-value {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .content {
   flex: 1;
   background-color: #fff;
@@ -206,7 +329,7 @@
 }
 
 .form-search input,
-.form-search select {
+.form-search select{
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -226,6 +349,64 @@
 .form-container button[type="submit"]:hover {
   background-color: #45a049;
 }
+/* ---------------- Filtres */
+.filtres-container {
+  margin-top: 20px;
+}
+
+.filtres-container button {
+  background-color: #f5f5f5;
+  color: #555555;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filtres-container button:hover {
+  background-color: #e0e0e0;
+}
+
+.filtres-container > div {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.filtres-container > div button {
+  background-color: #ffffff;
+  color: #555555;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filtres-container > div button:hover {
+  background-color: #f0f0f0;
+}
+.toggleSurvivant{
+  margin-bottom: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-search .toggleSurvivant label{
+  margin-bottom: 0;
+}
+
+/* ---------------- Results */
 
 .result {
   margin: 50px 15%;
@@ -412,5 +593,18 @@
   
   .filter-button {
     font-size: 20px;
+  }
+}
+
+/* Animations */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

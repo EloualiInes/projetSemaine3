@@ -1,6 +1,7 @@
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import { TypeData } from '../types/typesChart';
+
 Chart.register(...registerables);
 
 export default function ChartComposant({ data, mode }: { data: TypeData, mode: number }) {
@@ -8,6 +9,9 @@ export default function ChartComposant({ data, mode }: { data: TypeData, mode: n
     responsive: true,
     maintainAspectRatio: false
   };
+
+  
+  
 
   const displayAffiche = () => {
     switch (mode) {
@@ -23,8 +27,10 @@ export default function ChartComposant({ data, mode }: { data: TypeData, mode: n
           return <Pie data={modifiedData} options={defaultOptions} />;
         }
         return null;
+       
       default:
         return <Bar data={data} options={defaultOptions} />;
+      
     }
   }
 

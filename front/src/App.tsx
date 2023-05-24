@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Register from './components/user/register';
-import Login from './components/user/login';
-import Home from './components/home';
+import Register from './containers/user/register';
+import Login from './containers/user/login';
+import Home from './containers/home';
 import { Provider } from 'react-redux';
 import { store } from './lib/redux/store';
 import RequireAuth from './lib/helpers/RequireAuth';

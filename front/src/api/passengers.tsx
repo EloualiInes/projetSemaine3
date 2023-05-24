@@ -27,7 +27,16 @@ export const getClass = async () =>{
     }
 }
 
-export const searchPassengers = async (data : {nom : string, age : number,sexe : string, classe : number }) =>{
+export const getSurvived = async () =>{
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/stats/survived`);
+        return response.data;
+    } catch (error :  any) {
+        throw error.response.data.error;
+    }
+}
+
+export const searchPassengers = async (data : {nom?: string, age ?:number,sexe ?: string, classe ?: number }) =>{
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/stats/search`, data);
         return response.data;
