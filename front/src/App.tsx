@@ -7,7 +7,7 @@ import Home from './containers/home';
 import { Provider } from 'react-redux';
 import { store } from './lib/redux/store';
 import RequireAuth from './lib/helpers/RequireAuth';
-import Navbar from './components/navbar';
+import Navbar from './components/Navbar';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
@@ -16,34 +16,34 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <Router>
-          <Navbar/>
+          <Navbar />
           <Routes>
-            <Route path="/" 
+            <Route path="/"
               element={
                 <RequireAuth withAuth={false}>
-                  <Register/> 
+                  <Register />
                 </RequireAuth>
-              } 
+              }
             />
-            <Route path="/login" 
+            <Route path="/login"
               element={
                 <RequireAuth withAuth={false}>
-                  <Login/>
+                  <Login />
                 </RequireAuth>
-              } 
+              }
             />
-            <Route path="/home" 
+            <Route path="/home"
               element={
                 <RequireAuth withAuth={true}>
-                  <Home/>
+                  <Home />
                 </RequireAuth>
-                  
-              } 
+
+              }
             />
           </Routes>
         </Router>
       </Provider>
-      
+
     </div>
   );
 }

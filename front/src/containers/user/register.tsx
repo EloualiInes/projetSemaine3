@@ -1,7 +1,7 @@
-import React, {useState, ReactElement} from 'react'
-// import { UserQuery } from '../../types/user-types';
+import React, { useState, ReactElement } from 'react';
 import { saveUser } from '../../api/user';
 import { useNavigate } from 'react-router-dom';
+import { TypeRegisterUser } from '../../types/typesUsers';
 
 export default function Register(): ReactElement {
     const [firstName, setFirstName] = useState<string>("");
@@ -9,35 +9,34 @@ export default function Register(): ReactElement {
     const [nickName, setNickName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [error, setError] = useState<string>(""); 
+    const [error, setError] = useState<string>("");
     const navigate = useNavigate()
 
-    const onSubmitForm = (e: any)=>{
+    const onSubmitForm = (e: any) => {
         e.preventDefault();
-        const data = {
+        const data: TypeRegisterUser = {
             firstName: firstName,
             lastName: lastName,
             nickName: nickName,
             email: email,
             password: password
         }
-        console.log("Hello data : ", data)
         saveUser(data)
-            .then((res)=>{
-                if(res.status === 200) {
+            .then((res) => {
+                if (res.status === 200) {
                     return navigate('/login')
                 }
-                
+
             }).catch((err: any) => {
-                setError(err); 
+                setError(err);
             });
-            
+
     }
 
 
     return (
         <div className='user-container'>
-            {error && <p>{error}</p>} 
+            {error && <p>{error}</p>}
             <form
                 onSubmit={onSubmitForm}
                 className="form-container"
@@ -46,60 +45,60 @@ export default function Register(): ReactElement {
                     <label>S'enregistrer</label>
                 </div>
                 <div className="form-group">
-                    <input 
+                    <input
                         className="form-input"
-                        type="text" 
-                        placeholder="Prénom" 
+                        type="text"
+                        placeholder="Prénom"
                         value={firstName}
-                        onChange={(e)=>{
+                        onChange={(e) => {
                             setFirstName(e.target.value)
                         }}
                     />
                 </div>
                 <div className="form-group">
-                    <input 
+                    <input
                         className="form-input"
                         required
-                        type="text" 
-                        placeholder="Nom" 
+                        type="text"
+                        placeholder="Nom"
                         value={lastName}
-                        onChange={(e)=>{
+                        onChange={(e) => {
                             setLastName(e.target.value)
                         }}
                     />
                 </div>
                 <div className="form-group">
-                    <input 
+                    <input
                         className="form-input"
                         required
-                        type="text" 
-                        placeholder="Pseudo" 
+                        type="text"
+                        placeholder="Pseudo"
                         value={nickName}
-                        onChange={(e)=>{
+                        onChange={(e) => {
                             setNickName(e.target.value)
                         }}
                     />
                 </div>
                 <div className="form-group">
-                    <input 
+                    <input
                         className="form-input"
                         required
-                        type="email" 
-                        placeholder="Email" 
+                        type="email"
+                        placeholder="Email"
                         value={email}
-                        onChange={(e)=>{
+                        onChange={(e) => {
                             setEmail(e.target.value)
                         }}
                     />
                 </div>
                 <div className="form-group">
-                    <input 
+                    <input
                         className="form-input"
                         required
-                        type="password" 
-                        placeholder="Mot de passe" 
+                        type="password"
+                        placeholder="Mot de passe"
                         value={password}
-                        onChange={(e)=>{
+                        onChange={(e) => {
                             setPassword(e.target.value)
                         }}
                     />
@@ -110,9 +109,9 @@ export default function Register(): ReactElement {
                 >
                     Envoyer
                 </button>
-                
+
             </form>
-            
+
         </div>
     )
 }

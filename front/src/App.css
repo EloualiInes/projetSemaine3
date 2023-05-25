@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: Titanic;
 }
 
 .navbar {
@@ -14,16 +14,35 @@
   color: #fff;
   background: linear-gradient(to right, #040f21, #1a4f79);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.navbar > ul {
+.logo {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  height: 75px;
+  width: 100px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.logo>img {
+  max-height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+
+}
+
+.navbar>ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
 }
 
-.navbar > ul li {
+.navbar>ul li {
   margin-right: 20px;
   text-decoration: none;
   font-size: 18px;
@@ -32,16 +51,16 @@
   color: #bcd6dd;
 }
 
-.navbar > ul li:last-child {
+.navbar>ul li:last-child {
   margin-right: 0;
 }
 
-.navbar > ul li:hover {
+.navbar>ul li:hover {
   color: #fff;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
-.navbar > ul li.active {
+.navbar>ul li.active {
   color: #fff;
   border-bottom: 2px solid #59a0cc;
 }
@@ -74,19 +93,15 @@
 }
 
 .form-container {
-  max-width: 350px;
-  margin: 60px auto;
+  width: 300px;
+  background: #fff;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 .form-title {
   text-align: center;
-  font-size: 24px;
-  font-weight: bold;
   margin-bottom: 20px;
-  color: #333;
 }
 
 .form-group {
@@ -94,7 +109,7 @@
 }
 
 .form-input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   font-size: 16px;
   border: none;
@@ -109,35 +124,38 @@
 
 .form-submit {
   width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 10px;
+  background: #1a4f79;
   color: #fff;
-  background-color: #3175a6;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .form-submit:hover {
-  background-color: #222;
+  background: #0e2d4d;
 }
 
 /* Home */
 .presentation-container {
-  height: calc(100vh - 60px) ;
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background: linear-gradient(to right, #040f21, #1a4f79);
+  background-size: 200% auto;
+  animation: waveAnimation 5s linear infinite;
   color: #fff;
+
 }
 
-.presentation-container h1{
+.presentation-container h1 {
   margin-top: 60px;
+
 }
+
+
 
 .presentation-text {
   font-size: 16px;
@@ -186,6 +204,7 @@
   margin-bottom: 20px;
 }
 
+
 .filter-button {
   padding: 8px 12px;
   background-color: #f2f2f2;
@@ -208,17 +227,18 @@
 
 
 /* Stats */
-.contentPrincipal{
+.contentPrincipal {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-.windowsearch{
-  flex :1;
+.windowsearch {
+  flex: 1;
   margin-top: 60px;
 }
+
 .tabs-container {
   display: flex;
   height: 400px;
@@ -314,7 +334,7 @@
 }
 
 /* WindowSearch  */
-.form-search{
+.form-search {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
@@ -329,7 +349,7 @@
 }
 
 .form-search input,
-.form-search select{
+.form-search select {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -349,6 +369,7 @@
 .form-container button[type="submit"]:hover {
   background-color: #45a049;
 }
+
 /* ---------------- Filtres */
 .filtres-container {
   margin-top: 20px;
@@ -370,7 +391,7 @@
   background-color: #e0e0e0;
 }
 
-.filtres-container > div {
+.filtres-container>div {
   margin-top: 10px;
   display: flex;
   justify-content: center;
@@ -379,7 +400,7 @@
   margin-bottom: 10px;
 }
 
-.filtres-container > div button {
+.filtres-container>div button {
   background-color: #ffffff;
   color: #555555;
   border: none;
@@ -390,10 +411,11 @@
   transition: background-color 0.3s ease;
 }
 
-.filtres-container > div button:hover {
+.filtres-container>div button:hover {
   background-color: #f0f0f0;
 }
-.toggleSurvivant{
+
+.toggleSurvivant {
   margin-bottom: 20px;
   font-weight: bold;
   display: flex;
@@ -402,7 +424,7 @@
   gap: 10px;
 }
 
-.form-search .toggleSurvivant label{
+.form-search .toggleSurvivant label {
   margin-bottom: 0;
 }
 
@@ -466,13 +488,14 @@
 /* Media */
 
 @media (min-width: 1024px) {
+
   /* Navbar */
   .navbar {
     height: 80px;
-    
+
   }
 
-  .navbar > ul li {
+  .navbar>ul li {
     font-size: 20px;
   }
 
@@ -480,7 +503,7 @@
   .user-container {
     height: calc(100vh - 80px);
   }
-  
+
   .form-container {
     max-width: 500px;
     margin: 80px auto;
@@ -490,7 +513,8 @@
     font-size: 26px;
   }
 
-  .form-input, .form-submit {
+  .form-input,
+  .form-submit {
     font-size: 18px;
   }
 
@@ -499,40 +523,45 @@
   .presentation-text {
     font-size: 18px;
   }
-  
+
   .presentation-text h2 {
     font-size: 26px;
   }
 
   /* Filter */
-  
+
   .filter-button {
     font-size: 16px;
   }
-  
+
 }
 
 @media (min-width: 1440px) {
+
   /* Navbar */
   .navbar {
     height: 100px;
   }
-  .navbar > ul li {
+
+  .navbar>ul li {
     font-size: 22px;
   }
+
   /* Formulaire user */
   .user-container {
     height: calc(100vh - 100px);
   }
-  
+
   .form-container {
     margin: 120px auto;
   }
+
   .form-title {
     font-size: 28px;
   }
 
-  .form-input, .form-submit {
+  .form-input,
+  .form-submit {
     font-size: 20px;
   }
 
@@ -541,24 +570,26 @@
   .presentation-text {
     font-size: 20px;
   }
-  
+
   .presentation-text h2 {
     font-size: 28px;
   }
 
   /* Filter */
-  
+
   .filter-button {
     font-size: 18px;
   }
 }
 
 @media (min-width: 1920px) {
+
   /* Navbar */
   .navbar {
     height: 120px;
   }
-  .navbar > ul li {
+
+  .navbar>ul li {
     font-size: 24px;
   }
 
@@ -566,7 +597,7 @@
   .user-container {
     height: calc(100vh - 120px);
   }
-  
+
   .form-container {
     margin: 140px auto;
   }
@@ -575,7 +606,8 @@
     font-size: 30px;
   }
 
-  .form-input, .form-submit {
+  .form-input,
+  .form-submit {
     font-size: 22px;
   }
 
@@ -584,13 +616,13 @@
   .presentation-text {
     font-size: 22px;
   }
-  
+
   .presentation-text h2 {
     font-size: 30px;
   }
 
   /* Filter */
-  
+
   .filter-button {
     font-size: 20px;
   }
@@ -601,10 +633,27 @@
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0);
+  }
+}
+
+
+@keyframes waveAnimation {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
   }
 }

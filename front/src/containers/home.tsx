@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../lib/redux/userReducer';
 import { getAge, getClass, getSexe, getSurvived } from '../api/passengers';
 import ChartComposant from '../components/ChartComposant';
-import { TypeData } from '../types/typesChart';
+import { TypeData } from '../types/components/typesChart';
 import { colorBorder, colorPalette } from '../lib/helpers/Color';
-import WindowSearch from '../components/windowSearch';
+import WindowSearch from '../components/WindowSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 import { faChartBar } from '@fortawesome/free-regular-svg-icons';
@@ -31,17 +31,19 @@ export default function Home() {
   const [showDeviation, setShowDeviation] = useState(false);
   const [visibleAverageAge, setVisibleAverageAge] = useState(false);
 
+  // Can extract first number in string 
   const extractNumericValueStart = (ageRange: string) => {
     const [start] = ageRange.split('-');
     return parseInt(start, 10);
   };
 
-  const extractNumericValueEnd= (ageRange: string) => {
+  // Can extract second number in string 
+  const extractNumericValueEnd = (ageRange: string) => {
     const [, end] = ageRange.split('-');
     return parseInt(end, 10);
   };
 
-
+  // Managing age statistics data
   const handleStatsAge = async () => {
     setVisibleGrapheGlobal(true);
     setVisibleAverageAge(true);
@@ -56,6 +58,7 @@ export default function Home() {
     displayStats(labels, counts, "Age des passagers");
   }
 
+  // Managing sexe statistics data
   const handleStatsSexe = async () => {
     setVisibleGrapheGlobal(true);
     setVisibleAverageAge(false);
@@ -65,6 +68,7 @@ export default function Home() {
     displayStats(labels, counts, "Sexe des passagers");
   }
 
+  // Managing class statistics data
   const handleStatsClass = async () => {
     setVisibleGrapheGlobal(true);
     setVisibleAverageAge(false);
@@ -79,6 +83,7 @@ export default function Home() {
     displayStats(labels, counts, "Classes des passagers");
   }
 
+  // Managing survived statistics data
   const handleStatsSurvived = async () => {
     setVisibleGrapheGlobal(true);
     setVisibleAverageAge(false);
@@ -92,6 +97,7 @@ export default function Home() {
     const counts = survivedPassengers.map(({ count }) => count);
     displayStats(labels, counts, "Les survivants");
   }
+
 
   const displayStats = (labels: string[], counts: number[], titleGraphe: string) => {
     setDisplayGraphe(prevState => ({
@@ -111,26 +117,20 @@ export default function Home() {
     return total / data.length;
   };
 
-  const calculateAverageAge = (data: number[], labels : string[]) => {
-   console.log("data : ", data);
-   console.log("labels : ", labels);
-   const averageAgeCategories = labels.map((e, i ) =>{
-    if(i !== labels.length - 1){
-      const borneS = extractNumericValueStart(e);
-      const borneE = extractNumericValueEnd(e);
-      return Math.ceil(((borneE - borneS)/2) + borneS)
-    }
-    return 60;
-   }) 
+  const calculateAverageAge = (data: number[], labels: string[]) => {
+    const averageAgeCategories = labels.map((e, i) => {
+      if (i !== labels.length - 1) {
+        const borneS = extractNumericValueStart(e);
+        const borneE = extractNumericValueEnd(e);
+        return Math.ceil(((borneE - borneS) / 2) + borneS)
+      }
+      return 60;
+    });
+    let averageAgePassengers = 0;
+    for (let i = 0; i < data.length; i++)
+      averageAgePassengers += data[i] * averageAgeCategories[i]
 
-  //  const sumPassengers = data.reduce((acc, value) => acc + value, 0);
-
-   console.log("averageAge :", averageAgeCategories)
-   let averageAgePassengers = 0;
-   for(let i = 0; i < data.length; i++){
-    averageAgePassengers += data[i] * averageAgeCategories[i]
-   }
-   return averageAgePassengers / data.reduce((acc, value) => acc + value, 0);
+    return averageAgePassengers / data.reduce((acc, value) => acc + value, 0);
   };
 
   function calculateStandardDeviation(values: number[]): number {
@@ -140,7 +140,6 @@ export default function Home() {
     const sumSquaredDifferences: number = squaredDifferences.reduce((acc, value) => acc + value, 0);
     const variance: number = sumSquaredDifferences / n;
     const standardDeviation: number = Math.sqrt(variance);
-    console.log("standard : ", standardDeviation);
     return standardDeviation;
   }
 

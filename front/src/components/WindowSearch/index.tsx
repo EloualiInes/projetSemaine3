@@ -1,39 +1,29 @@
 import React, { useState } from 'react';
-import { searchPassengers } from '../api/passengers';
-import SwitchButton from './SwitchButton';
+import { searchPassengers } from '../../api/passengers';
+import SwitchButton from '../SwitchButton';
+import { TypePassengers } from '../../types/components/typePassengers';
 
 
-type TypePassenger = {
-    Name: string,
-    Age: number,
-    Sex: string,
-    Pclass: number,
-    PassengerId: number,
-    Cabin: string,
-    Ticket: number,
-    Survived: number
-}
+
 export default function WindowSearch() {
     const [nom, setNom] = useState('');
     const [age, setAge] = useState({ value: "", visible: false });
     const [sexe, setSexe] = useState({ value: 'female', visible: false });
     const [classe, setClasse] = useState({ value: 'classe 1', visible: false });
     const [survivant, setSurvivant] = useState({ value: 0, visible: false });
-    const [result, setResult] = useState([]);
+    const [result, setResult] = useState({ value: [], visible: false });
     const [visibleBtnFiltre, setVisibleBtnFiltre] = useState<boolean>(false);
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         let data = {};
-        if(nom.trim()) data = {...data, nom : nom};
-        if(age.value && age.visible) data = {...data, age : parseInt(age.value, 10)};
-        if(sexe.value && sexe.visible) data = {...data, sexe : sexe.value};
-        if(classe.value && classe.visible) data = {...data, classe : parseInt(classe.value.slice(6), 10)};
-        if(survivant.visible) data = {...data, survivant : survivant.value};
-        console.log("data : ", data);
-        const p = await searchPassengers(data)
-        console.log("res : ", p);
-        setResult(p);
+        if (nom.trim()) data = { ...data, nom: nom };
+        if (age.value && age.visible) data = { ...data, age: parseInt(age.value, 10) };
+        if (sexe.value && sexe.visible) data = { ...data, sexe: sexe.value };
+        if (classe.value && classe.visible) data = { ...data, classe: parseInt(classe.value.slice(6), 10) };
+        if (survivant.visible) data = { ...data, survivant: survivant.value };
+        const p = await searchPassengers(data);
+        setResult({ value: p, visible: true });
     };
 
     return (
@@ -48,14 +38,14 @@ export default function WindowSearch() {
                 <div className="filtres-container">
                     <button type="button" onClick={() => setVisibleBtnFiltre(!visibleBtnFiltre)}>Filtres complémentaires</button>
                     {visibleBtnFiltre && <div>
-                        <button type="button" onClick={() => setAge({...age, visible : !age.visible})}>Age</button>
-                        <button type="button" onClick={() => setSexe({...sexe, visible : !sexe.visible})}>Sexe</button>
-                        <button type="button" onClick={() => setClasse({...classe, visible : !classe.visible})}>Classe</button>
-                        <button type="button" onClick={() => setSurvivant({...survivant, visible : !survivant.visible})}>Survivants</button>
+                        <button type="button" onClick={() => setAge({ ...age, visible: !age.visible })}>Age</button>
+                        <button type="button" onClick={() => setSexe({ ...sexe, visible: !sexe.visible })}>Sexe</button>
+                        <button type="button" onClick={() => setClasse({ ...classe, visible: !classe.visible })}>Classe</button>
+                        <button type="button" onClick={() => setSurvivant({ ...survivant, visible: !survivant.visible })}>Survivants</button>
                     </div>}
                 </div>
-                
-                
+
+
                 {age.visible && (<div>
                     <label htmlFor="age">Age :</label>
                     <input type="text" id="age" value={age.value} onChange={(e) => setAge({ ...age, value: e.target.value })} />
@@ -74,11 +64,11 @@ export default function WindowSearch() {
                 {survivant.visible &&
                     <div className='toggleSurvivant'>
                         Survivants
-                        <SwitchButton label="survivant" 
-                        onChange = {() => setSurvivant({ ...survivant, value: survivant.value === 0 ? 1 : 0 })}
+                        <SwitchButton label="survivant"
+                            onChange={() => setSurvivant({ ...survivant, value: survivant.value === 0 ? 1 : 0 })}
                         />
                     </div>
-                  
+
                 }
                 {classe.visible && (<div>
                     <label htmlFor="classe">Classe :</label>
@@ -90,22 +80,22 @@ export default function WindowSearch() {
                 </div>)}
                 <button type="submit">Valider</button>
             </form>
-            {result && (
+            {result && result.visible && (
                 <>
-                    <p>{result.length} résultat{result.length > 1 ? "s" : ""}</p>
+                    <p>{result.value.length} résultat{result.value.length > 1 ? "s" : ""}</p>
                     <div className="result">
 
-                        {result.map((e: TypePassenger) => (
+                        {result.value.map((e: TypePassengers) => (
                             <div className="result-card" key={e.PassengerId}>
                                 <div className="result-card-content">
                                     <p className="result-card-heading">{e.Name}</p>
                                     <div className="result-card-details">
-                                        <p>Age: {e.Age}</p>
-                                        <p>Genre: {e.Sex}</p>
-                                        <p>Classe: {e.Pclass}</p>
-                                        <p>Numéro passager: {e.PassengerId}</p>
-                                        <p>Cabine: {e.Cabin}</p>
-                                        <p>Billet: {e.Ticket}</p>
+                                        <p>Age: {e.Age || " /"}</p>
+                                        <p>Genre: {(e.Sex && e.Sex === "male" ? "Homme" : "Femme") || " /"}</p>
+                                        <p>Classe: {e.Pclass || " /"}</p>
+                                        <p>Numéro passager: {e.PassengerId || " /"}</p>
+                                        <p>Cabine: {e.Cabin || " / "}</p>
+                                        <p>Billet: {e.Ticket || " /"}</p>
                                         <p className={e.Survived === 0 ? "result-card-not-survived" : "result-card-survived"}>
                                             {e.Survived === 0 ? "N'a pas survécu" : "A survécu"}
                                         </p>

@@ -1,13 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUserReducer, selectUser } from '../lib/redux/userReducer';
+import { logoutUserReducer, selectUser } from '../../lib/redux/userReducer';
 import { useNavigate } from 'react-router-dom';
+
 
 function Navbar() {
   const isAuthenticated = useSelector(selectUser).isLogged;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // User want logout => remove token and infos => redirection login
   const handleLogout = () => {
     localStorage.removeItem('token');
     dispatch(logoutUserReducer());

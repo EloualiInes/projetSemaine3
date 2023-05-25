@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import styles from './styles.module.css'
+import { TypeSwitchButton } from '../../types/components/typeSwitchButton';
 
-const SwitchButton = (data : {
-    label : string,
-    onChange : () => void
-  }) => {
+const SwitchButton = (data: TypeSwitchButton) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
-    console.log("isChecked :", isChecked)
     data.onChange();
   };
 
