@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Count the number of women and men
 getStatsSexe = async (req, res) => {
     try {
         const c = mongoose.connection.db.collection('passengers');
@@ -17,6 +18,7 @@ getStatsSexe = async (req, res) => {
     }
 }
 
+// Count the number of people by age group
 getStatsAge = async (req, res) => {
     try {
         const c = mongoose.connection.db.collection('passengers');
@@ -44,7 +46,7 @@ getStatsAge = async (req, res) => {
     }
 }
 
-
+// Count the number of people by class
 getStatsClass = async (req, res) => {
     try {
         const c = mongoose.connection.db.collection('passengers');
@@ -62,6 +64,7 @@ getStatsClass = async (req, res) => {
     }
 }
 
+//  Count the number of people who survived
 getStatsSurvived = async (req, res) => {
     try {
         const c = mongoose.connection.db.collection('passengers');
@@ -79,33 +82,33 @@ getStatsSurvived = async (req, res) => {
     }
 }
 
+// Searches for passengers who match optional criteria
 searchPassengers = async (req, res) => {
     const dataTrim = trimObjectValues(req.body);
-    console.log("var :", dataTrim);
     try {
-      const c = mongoose.connection.db.collection('passengers');
-      const matchConditions = {};
-  
-      if (dataTrim.nom) {
-        const regexName = new RegExp(dataTrim.nom, 'i');
-        matchConditions.Name = regexName;
-      }
-      if (dataTrim.sexe) matchConditions.Sex = dataTrim.sexe;
-      if (dataTrim.classe) matchConditions.Pclass = dataTrim.classe;
-      if (dataTrim.age) matchConditions.Age = dataTrim.age;
-      if (typeof dataTrim.survivant !== 'undefined') matchConditions.Survived = dataTrim.survivant;
-  
-      const q = await c.aggregate([
-        {
-          $match: matchConditions
+        const c = mongoose.connection.db.collection('passengers');
+        const matchConditions = {};
+
+        if (dataTrim.nom) {
+            const regexName = new RegExp(dataTrim.nom, 'i');
+            matchConditions.Name = regexName;
         }
-      ]).toArray();
-  
-      res.json(q);
+        if (dataTrim.sexe) matchConditions.Sex = dataTrim.sexe;
+        if (dataTrim.classe) matchConditions.Pclass = dataTrim.classe;
+        if (dataTrim.age) matchConditions.Age = dataTrim.age;
+        if (typeof dataTrim.survivant !== 'undefined') matchConditions.Survived = dataTrim.survivant;
+
+        const q = await c.aggregate([
+            {
+                $match: matchConditions
+            }
+        ]).toArray();
+
+        res.json(q);
     } catch (error) {
-      res.status(500).json({ error: 'Une erreur est survenue.' });
+        res.status(500).json({ error: 'Une erreur est survenue.' });
     }
-  };
-  
+};
+
 
 module.exports = { getStatsSexe, getStatsAge, getStatsClass, getStatsSurvived, searchPassengers }

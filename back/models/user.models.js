@@ -7,6 +7,6 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     creationDate: Date
-}, {collection: "user", versionKey: false })
+}, { collection: "user", versionKey: false })
 
 module.exports = mongoose.model('User', userSchema);

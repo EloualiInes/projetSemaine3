@@ -1,16 +1,16 @@
 trimObjectValues = (obj) => {
-    const trimmedObj = {};
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        const value = obj[key];
-        if (typeof value === 'string') {
-          trimmedObj[key] = value.trim();
-        } else {
-          trimmedObj[key] = value;
-        }
+  const trimmedObj = {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      if (typeof value === 'string') {
+        trimmedObj[key] = value.trim();
+      } else {
+        trimmedObj[key] = value;
       }
     }
-    return trimmedObj;
   }
+  return trimmedObj;
+}
 
-module.exports = {trimObjectValues}
+module.exports = { trimObjectValues }

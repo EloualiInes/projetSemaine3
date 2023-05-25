@@ -18,12 +18,12 @@ app.use("/api/user", routeUser);
 app.use("/api/auth", routeAuth);
 app.use("/api/stats", routepassengers);
 
-const connect = async() => {
-    try{
+const connect = async () => {
+    try {
         await mongoose.connect(dbUrl);
         console.log("Base de donnée connectée");
-        app.listen(port, console.log("Server has started at port " + port)) 
-    }catch(e){
+        app.listen(port, console.log("Server has started at port " + port))
+    } catch (e) {
         console.log("Impossible de démarrer l'appli : ", e)
     }
 }

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getStatsSexe, getStatsAge, getStatsClass,getStatsSurvived, searchPassengers } = require('../controllers/passengers.controllers');
+const { getStatsSexe, getStatsAge, getStatsClass, getStatsSurvived, searchPassengers } = require('../controllers/passengers.controllers');
 const router = express.Router();
 
 router.get('/sexe', getStatsSexe);
