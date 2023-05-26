@@ -32,8 +32,6 @@ export default function Register(): ReactElement {
             }).catch((err: any) => {
                 setError(err);
             });
-
-
     }
 
     return (
@@ -47,7 +45,7 @@ export default function Register(): ReactElement {
                 <div className="form-title">
                     <label>Se connecter</label>
                 </div>
-                {error && <p style={{ color: "red" }}><FontAwesomeIcon icon={faExclamationCircle} /> {error}</p>}
+                
                 <div className="form-group">
                     <input
                         className="form-input"

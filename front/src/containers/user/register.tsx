@@ -2,6 +2,8 @@ import React, { useState, ReactElement } from 'react';
 import { saveUser } from '../../api/user';
 import { useNavigate } from 'react-router-dom';
 import { TypeRegisterUser } from '../../types/typesUsers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function Register(): ReactElement {
     const [firstName, setFirstName] = useState<string>("");
@@ -36,7 +38,6 @@ export default function Register(): ReactElement {
 
     return (
         <div className='user-container'>
-            {error && <p>{error}</p>}
             <form
                 onSubmit={onSubmitForm}
                 className="form-container"
@@ -44,6 +45,7 @@ export default function Register(): ReactElement {
                 <div className="form-title">
                     <label>S'enregistrer</label>
                 </div>
+                {error && <p style={{ color: "red" }}><FontAwesomeIcon icon={faExclamationCircle} /> {error}</p>}
                 <div className="form-group">
                     <input
                         className="form-input"

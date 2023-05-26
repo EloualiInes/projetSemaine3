@@ -21,6 +21,24 @@ signup = async (req, res) => {
         return;
     }
 
+    //  checks pseudo or email not exist
+    const findEmail = await User.find({
+        email: { $regex: new RegExp('^' + dataTrim.email, 'i') }
+    });
+    if (findEmail.length > 0 ) {
+        res.status(404).json({ error: "L'e-mail saisi existe déjà. " });
+        return;
+    }
+
+    const findPseudo = await User.find({
+        nickName: dataTrim.nickName 
+    });
+
+    if (findPseudo.length > 0 ) {
+        res.status(404).json({ error: "Le pseudo saisi n'est pas disponible" });
+        return;
+    }
+
     const hash = await bcrypt.hash(dataTrim.password, saltRounds);
     const data = {
         firstName: dataTrim.firsName,

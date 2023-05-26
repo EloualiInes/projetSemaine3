@@ -152,20 +152,21 @@
 
 .presentation-container h1 {
   margin-top: 60px;
+  font-size: 30px;
 
 }
 
 
 
 .presentation-text {
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   line-height: 1.5;
-  margin: 0 15%;
+  margin: 0 10%;
 }
 
 .presentation-text h2 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -520,12 +521,21 @@
 
   /* Home */
 
+  .presentation-container {
+    height: calc(100vh - 80px);
+  }
+  
+  .presentation-container h1 {
+    margin-top: 65px;
+    font-size: 36px;
+  }
+
   .presentation-text {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .presentation-text h2 {
-    font-size: 26px;
+    font-size: 30px;
   }
 
   /* Filter */
@@ -566,13 +576,21 @@
   }
 
   /* Home */
+  .presentation-container {
+    height: calc(100vh - 100px);
+  }
+  
+  .presentation-container h1 {
+    margin-top: 80px;
+    font-size: 48px;
+  }
 
   .presentation-text {
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .presentation-text h2 {
-    font-size: 28px;
+    font-size: 36px;
   }
 
   /* Filter */
@@ -612,13 +630,21 @@
   }
 
   /* Home */
+  .presentation-container {
+    height: calc(100vh - 120px);
+  }
+  
+  .presentation-container h1 {
+    margin-top: 120px;
+    font-size: 56px;
+  }
 
   .presentation-text {
-    font-size: 22px;
+    font-size: 36px;
   }
 
   .presentation-text h2 {
-    font-size: 30px;
+    font-size: 48px;
   }
 
   /* Filter */
