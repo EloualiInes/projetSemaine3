@@ -41,7 +41,7 @@ export default function Register(): ReactElement {
                 onSubmit={onSubmitForm}
                 className="form-container"
             >
-
+                {error && <p style={{ color: "red" }}><FontAwesomeIcon icon={faExclamationCircle} /> {error}</p>}
                 <div className="form-title">
                     <label>Se connecter</label>
                 </div>
